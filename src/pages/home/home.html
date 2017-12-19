@@ -1,14 +1,35 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Criptografia
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-item class="item">
+    <ion-label floating>Texto</ion-label>
+    <ion-input type="text" [(ngModel)]="texto"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Chave</ion-label>
+    <ion-input type="text" [(ngModel)]="chave" [disabled]="tipo !== 'DES' && tipo !== 'AES'"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating style="margin-top: 25px"></ion-label>
+    <ion-select [(ngModel)]="tipo" okText="Ok" cancelText="Cancelar">
+      <ion-option *ngFor="let t of tipos" [value]="t">{{t}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item style="margin-top: 40px">
+    <ion-input type="text" placeholder="Resultado" disabled="true" [(ngModel)]="resultado"></ion-input>
+  </ion-item>
+
+  <button class="btnCrypt" ion-button block (click)="cifrar()">Cifrar/Hash</button>
+  <button class="btnDeCrypt" [disabled]="tipo !== 'DES' && tipo !== 'AES'" ion-button block (click)="decifrar()">Decifrar</button>
+
+
 </ion-content>
